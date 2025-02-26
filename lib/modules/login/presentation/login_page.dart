@@ -65,7 +65,7 @@ class LoginPage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 50),
-            loginProvider.isLoading
+            loginProvider.isloading
                 ? const CircularProgressIndicator(color: Colors.white)
                 : GoogleSignInButton(
                     onPressed: () => loginProvider.signInWithGoogle(context),
