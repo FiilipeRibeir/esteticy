@@ -6,7 +6,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupLoginDependencies();
-  setupHomeDependencies();
+  setupProfileDependencies();
 
   await Supabase.initialize(
     url: Config.supabaseUrl,
@@ -17,7 +17,7 @@ Future<void> main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => getIt<LoginProvider>()),
-        ChangeNotifierProvider(create: (_) => getIt<HomeProvider>()),
+        ChangeNotifierProvider(create: (_) => getIt<ProfileProvider>()),
       ],
       child: const AppPage(),
     ),
