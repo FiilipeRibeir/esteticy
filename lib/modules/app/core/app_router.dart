@@ -9,6 +9,7 @@ class AppRouter {
       },
       routes: [
         SplashRouter.routes(),
+        LoginRouter.routes(),
       ],
     );
   }
