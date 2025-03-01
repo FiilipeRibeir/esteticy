@@ -1,6 +1,5 @@
 import 'package:esteticy/index.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -45,7 +44,8 @@ class _ProfilePageState extends State<ProfilePage> {
         actions: [
           IconButton(
             icon: const Icon(Icons.logout, color: Colors.white),
-            onPressed: () => _confirmSignOut(context),
+            onPressed: () => confirmSignOut(
+                context), // Chamando a função de logout do novo arquivo
           ),
         ],
       ),
@@ -115,11 +115,13 @@ class _ProfilePageState extends State<ProfilePage> {
                     builder: (context, profileProvider, child) {
                       return Column(
                         children: [
-                          _buildInfoTile(
+                          buildInfoTile(
+                            // Usando a função de buildInfoTile importada
                             "📅 Agendamentos hoje",
                             "${profileProvider.agendamentosHoje}",
                           ),
-                          _buildInfoTile(
+                          buildInfoTile(
+                            // Usando a função de buildInfoTile importada
                             "💰 Saldo disponível",
                             "R\$ ${profileProvider.totalPaid}",
                           ),
@@ -134,57 +136,5 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ),
     );
-  }
-
-  Widget _buildInfoTile(String title, String value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(fontSize: 16, color: Colors.white),
-          ),
-          Text(
-            value,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Future<void> _confirmSignOut(BuildContext context) async {
-    final bool? shouldLogout = await showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text("Sair"),
-        content: const Text("Tem certeza que deseja sair?"),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: const Text("Cancelar"),
-          ),
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            child: const Text("Sair"),
-          ),
-        ],
-      ),
-    );
-
-    if (shouldLogout == true) {
-      // ignore: use_build_context_synchronously
-      await getIt<LoginProvider>().signOut(context);
-
-      if (context.mounted) {
-        context.go('/home');
-      }
-    }
   }
 }

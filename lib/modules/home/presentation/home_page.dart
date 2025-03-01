@@ -15,7 +15,7 @@ class HomePageState extends State<HomePage> {
     const PaymentsPage(),
     const ClientsPage(),
     const CalendarPage(),
-    const WorksPage(),
+    WorksPage(),
     ProfilePage()
   ];
 

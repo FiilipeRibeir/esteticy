@@ -6,28 +6,14 @@ class ProfileRepository {
   final supabase = Supabase.instance.client;
 
   Future<List> fetchData() async {
-    final user = supabase.auth.currentUser;
-    if (user == null) {
-      throw 'Usuário não autenticado';
-    }
-    final email = user.email;
-
     try {
-      final userData = await getUserData(email!);
+      final userData = await HomeProvider().getUser();
       final dataLocal =
           DateTime.now().toUtc().subtract(const Duration(hours: 3));
       final userid = userData['id'];
       return await getAppointmentsData(dataLocal, userid);
     } catch (e) {
       throw Exception("Erro no home com fetchData: $e");
-    }
-  }
-
-  Future<Map<String, dynamic>> getUserData(String emailUser) async {
-    try {
-      return await http.get('/user', queryParameters: {'email': emailUser});
-    } catch (e) {
-      throw Exception("Erro ao buscar dados do usuário: $e");
     }
   }
 
