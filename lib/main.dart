@@ -7,6 +7,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupLoginDependencies();
   setupProfileDependencies();
+  setupWorkDependencies();
+  setupHomeDependencies();
 
   await Supabase.initialize(
     url: Config.supabaseUrl,
@@ -18,6 +20,7 @@ Future<void> main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => getIt<LoginProvider>()),
         ChangeNotifierProvider(create: (_) => getIt<ProfileProvider>()),
+        ChangeNotifierProvider(create: (_) => getIt<WorkProvider>()),
       ],
       child: const AppPage(),
     ),
