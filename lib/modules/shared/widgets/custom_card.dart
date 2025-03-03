@@ -2,15 +2,23 @@ import 'package:flutter/material.dart';
 
 class CustomCard extends StatelessWidget {
   final String title;
+  final Color? titleColor;
   final Widget child;
+  final Color? color;
 
-  const CustomCard({required this.title, required this.child, super.key});
+  const CustomCard({
+    required this.title,
+    required this.child,
+    super.key,
+    this.color,
+    this.titleColor,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: color,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      margin: const EdgeInsets.symmetric(horizontal: 24),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -18,7 +26,11 @@ class CustomCard extends StatelessWidget {
           children: [
             Text(
               title,
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: titleColor,
+              ),
             ),
             const SizedBox(height: 12),
             SingleChildScrollView(child: child),

@@ -6,7 +6,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
 class HttpService {
-  final String baseUrl = 'http://192.168.1.2:3300';
+  final String baseUrl = 'http://192.168.1.12:3300';
   final String fallbackUrl = 'http://localhost:3300';
   final storage = FlutterSecureStorage();
 
