@@ -123,7 +123,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           buildInfoTile(
                             // Usando a função de buildInfoTile importada
                             "💰 Saldo disponível",
-                            "R\$ ${profileProvider.totalPaid}",
+                            "R\$ future...",
                           ),
                         ],
                       );

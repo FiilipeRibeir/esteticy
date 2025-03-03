@@ -9,18 +9,10 @@ class ProfileProvider extends ChangeNotifier {
   int _agendamentosHoje = 0;
   int get agendamentosHoje => _agendamentosHoje;
 
-  double _totalPaid = 0.0;
-  double get totalPaid => _totalPaid;
-
   Future<void> fetchData() async {
     try {
       final List appointments = await profileRepository.fetchData();
       _agendamentosHoje = appointments.length;
-
-      final user = supabase.auth.currentUser;
-      if (user != null) {
-        _totalPaid = await profileRepository.getTotalPaidByUser(user.id);
-      }
 
       notifyListeners();
     } catch (e) {

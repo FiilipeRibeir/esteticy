@@ -31,26 +31,4 @@ class ProfileRepository {
       throw Exception("Erro ao buscar dados do compromisso: $e");
     }
   }
-
-  Future<double> getTotalPaidByUser(String userId) async {
-    const tableName = 'appointments';
-    const paid = 'paidAmount';
-
-    try {
-      final response =
-          await supabase.from(tableName).select(paid).eq('"userId"', userId);
-
-      final List<dynamic> data = response as List<dynamic>;
-      if (data.isEmpty) return 0.0;
-
-      double total = data.fold(0.0, (prev, e) {
-        double amount = (e['paidAmount'] as num?)?.toDouble() ?? 0.0;
-        return prev + amount;
-      });
-
-      return total;
-    } catch (e) {
-      throw Exception("Erro ao calcular o total de pagamentos: $e");
-    }
-  }
 }
